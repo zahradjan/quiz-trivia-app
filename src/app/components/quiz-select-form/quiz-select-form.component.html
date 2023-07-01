@@ -1,23 +1,26 @@
-<h1>Quiz Maker</h1>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field>
+    <mat-label>Select a category</mat-label>
+    <mat-select id="categorySelect" formControlName="categoryId">
+      <mat-option
+        *ngFor="let category of categories"
+        [value]="category.id"
+      >
+        {{ category.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-<mat-form-field>
-  <mat-label>Select a category</mat-label>
-  <mat-select id="categorySelect">
-    <mat-option *ngFor="let category of categories" [value]="category.id">
-      {{ category.name }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field>
-  <mat-label>Select difficulty</mat-label>
-  <mat-select id="difficultySelect">
-    <mat-option
-      *ngFor="let difficulty of difficulties"
-      [value]="difficulty.id"
-    >
-      {{ difficulty.name }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<button mat-raised-button id="createBtn">Create</button>
+  <mat-form-field>
+    <mat-label>Select difficulty</mat-label>
+    <mat-select id="difficultySelect" formControlName="difficulty">
+      <mat-option
+        *ngFor="let difficulty of difficulties"
+        [value]="difficulty | lowercase"
+      >
+        {{ difficulty }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button type="submit" mat-raised-button id="createBtn">Create</button>
+</form>
