@@ -1,0 +1,8 @@
+<span
+  [ngClass]="{
+    'score-red': score <= 1,
+    'score-yellow': score >= 1 && score <= 3,
+    'score-green': score >= 3
+  }"
+  >You scored {{ score }} out of 5
+</span>

@@ -1,0 +1,12 @@
+.score-red {
+  background-color: red;
+  width: max-content;
+}
+.score-yellow {
+  background-color: yellow;
+  width: 100%;
+}
+.score-green {
+  background-color: green;
+  width: max-content;
+}

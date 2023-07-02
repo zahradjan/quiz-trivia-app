@@ -14,14 +14,14 @@ export class QuizSelectFormComponent {
 
   @Output() create: EventEmitter<QuestionParams> =
     new EventEmitter<QuestionParams>();
-  difficulties = ["Easy", "Medium", "Hard"];
+  difficulties: string[] = ["Easy", "Medium", "Hard"];
 
   form: FormGroup;
   constructor(private fb: NonNullableFormBuilder) {
     this.form = this.createForm();
   }
 
-  submit() {
+  submit(): void {
     console.log(this.form.value);
     this.create.emit(this.form.value);
   }

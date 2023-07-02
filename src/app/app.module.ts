@@ -12,12 +12,23 @@ import { MatButtonModule } from "@angular/material/button";
 import { HttpClientModule } from "@angular/common/http";
 import { QuizQuestionComponent } from "./components/quiz-question/quiz-question.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { MatCardModule } from "@angular/material/card";
+import { ShufflePipe } from "./pipes/shuffle.pipe";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import { QuizFormComponent } from "./components/quiz-form/quiz-form.component";
+import QuizResultsPageComponent from "./pages/quiz-results-page/quiz-results-page.component";
+import { QuizScoreBannerComponent } from './components/quiz-score-banner/quiz-score-banner.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     QuizPageComponent,
     QuizSelectFormComponent,
     QuizQuestionComponent,
+    ShufflePipe,
+    QuizFormComponent,
+    QuizResultsPageComponent,
+    QuizScoreBannerComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +38,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     MatInputModule,
     MatButtonModule,
     HttpClientModule,
+    MatCardModule,
+    MatButtonToggleModule,
     ReactiveFormsModule,
   ],
   providers: [],

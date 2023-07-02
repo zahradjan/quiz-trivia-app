@@ -12,6 +12,8 @@ import { QuestionParams } from "../model/question-params";
 export class QuestionService {
   constructor(private http: HttpClient) {}
 
+  questionsResults: Question[] = [];
+
   getQuestions(questionParams: QuestionParams): Observable<Question[]> {
     console.log(questionParams);
     return this.http
@@ -25,5 +27,21 @@ export class QuestionService {
         headers: {},
       })
       .pipe(map((data) => data.results));
+  }
+
+  updateQuestions() {
+    this.questionsResults.map((question) => {
+      //TODO:dopracovat
+      question.selectedAnswer;
+    });
+  }
+
+  getScore(): number {
+    let score: number = 0;
+    this.questionsResults.forEach((question: Question) =>
+      question.selectedAnswer === question.correct_answer ? score++ : score
+    );
+
+    return score;
   }
 }

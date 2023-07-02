@@ -1,0 +1,32 @@
+<h1>RESULTS</h1>
+
+<ng-container *ngIf="questions">
+  <ng-container *ngFor="let question of questions; let i = index">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ question.question }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-actions>
+        <mat-button-toggle-group>
+          <mat-button-toggle
+            *ngFor="let answer of question.answers! | shuffle"
+            [ngClass]="{
+              'answer-correct': answer === question.correct_answer,
+              'answer-incorrect':
+                answer === question.selectedAnswer &&
+                question.selectedAnswer !== question.correct_answer
+            }"
+          >
+            {{ answer }}
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
+  <div>
+    <app-quiz-score-banner [score]="score"></app-quiz-score-banner>
+    <button mat-raised-button (click)="onClick()">
+      Create a new quiz
+    </button>
+  </div>
+</ng-container>
