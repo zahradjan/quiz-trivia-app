@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, map } from "rxjs";
 import { environment } from "src/environment";
+import { Answer } from "../model/answer";
 import { Question } from "../model/question";
 import { QuestionData } from "../model/question-data";
 import { QuestionParams } from "../model/question-params";
@@ -29,7 +30,7 @@ export class QuestionService {
       .pipe(map((data) => data.results));
   }
 
-  updateQuestions() {
+  updateQuestions(answers: Answer[]) {
     this.questionsResults.map((question) => {
       //TODO:dopracovat
       question.selectedAnswer;

@@ -1,16 +1,12 @@
 <form [formGroup]="form" (ngSubmit)="submitAnswers()">
-  <ng-container *ngIf="questions">
+  <ng-container *ngIf="questions" formArrayName="answers">
     <ng-container *ngFor="let question of questions; let i = index">
-      <mat-card>
+      <mat-card [formGroupName]="i">
         <mat-card-header>
-          <mat-card-title [formControlName]="'question' + i">{{
-            question.question
-          }}</mat-card-title>
+          <mat-card-title>{{ question.question }}</mat-card-title>
         </mat-card-header>
         <mat-card-actions>
-          <mat-button-toggle-group
-            [formControlName]="'selectedAnswer' + i"
-          >
+          <mat-button-toggle-group [formControlName]="'selectedAnswer'">
             <mat-button-toggle
               *ngFor="let answer of question.answers! | shuffle"
               [value]="answer"

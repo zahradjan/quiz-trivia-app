@@ -32,12 +32,13 @@ export default class QuizResultsPageComponent {
       answers: ["test1", "test2", "test3"],
     },
   ];
-  //mozna do constructoru davat
-  score: number = this.questionService.getScore();
+  score: number;
   constructor(
     private router: Router,
     private questionService: QuestionService
-  ) {}
+  ) {
+    this.score = this.questionService.getScore();
+  }
 
   onClick() {
     this.router.navigate([""]);

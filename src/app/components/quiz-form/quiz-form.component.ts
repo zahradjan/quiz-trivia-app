@@ -1,7 +1,6 @@
 import { map } from "rxjs";
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import {
-  FormControl,
   FormGroup,
   NonNullableFormBuilder,
   Validators,
@@ -27,14 +26,13 @@ export class QuizFormComponent {
           ],
         };
       });
-      this.patch();
     }
   }
 
   get questions(): Question[] | undefined {
     return this._questions;
   }
-  @Output() submit: EventEmitter<Answer> = new EventEmitter<Answer>();
+  @Output() submit: EventEmitter<Answer[]> = new EventEmitter<Answer[]>();
 
   form: FormGroup;
   private _questions?: Question[];
@@ -50,17 +48,21 @@ export class QuizFormComponent {
       .subscribe();
   }
   private createForm(): FormGroup {
-    return this.fb.group({});
-  }
-  patch() {
-    this.questions?.forEach((value, index) => {
-      this.form?.addControl(
-        "selectedAnswer" + index,
-        new FormControl("", { validators: Validators.required })
-      );
-      this.form?.addControl("question" + index, new FormControl(""));
+    return this.fb.group({
+      answers: this.fb.array([
+        this.createAnswerForm(),
+        this.createAnswerForm(),
+        this.createAnswerForm(),
+        this.createAnswerForm(),
+        this.createAnswerForm(),
+      ]),
     });
-    console.log(this.form);
+  }
+
+  private createAnswerForm(): FormGroup {
+    return this.fb.group({
+      selectedAnswer: [undefined, Validators.required],
+    });
   }
 
   submitAnswers(): void {

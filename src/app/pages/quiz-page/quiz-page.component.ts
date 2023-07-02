@@ -26,7 +26,7 @@ export class QuizPageComponent {
   onCreate(questionParams: QuestionParams): void {
     this.questions$ = this.questionService.getQuestions(questionParams);
   }
-  onAnswersSubmit(answers: Answer): void {
+  onAnswersSubmit(answers: Answer[]): void {
     console.log(answers);
     this.questionService.updateQuestions();
     this.router.navigate(["/results"]);
