@@ -5,7 +5,6 @@ import { Category } from "src/app/model/category";
 import { Question } from "src/app/model/question";
 import { QuestionService } from "src/app/service/question.service";
 import { QuestionParams } from "src/app/model/question-params";
-import { Answer } from "src/app/model/answer";
 import { Router } from "@angular/router";
 
 @Component({
@@ -26,9 +25,9 @@ export class QuizPageComponent {
   onCreate(questionParams: QuestionParams): void {
     this.questions$ = this.questionService.getQuestions(questionParams);
   }
-  onAnswersSubmit(answers: Answer[]): void {
-    console.log(answers);
-    this.questionService.updateQuestions();
+  onAnswersSubmit(questions: { answers: Question[] }): void {
+    console.log(questions);
+    this.questionService.updateQuestions(questions.answers);
     this.router.navigate(["/results"]);
   }
 }

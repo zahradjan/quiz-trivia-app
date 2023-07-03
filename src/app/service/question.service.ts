@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, map } from "rxjs";
 import { environment } from "src/environment";
-import { Answer } from "../model/answer";
 import { Question } from "../model/question";
 import { QuestionData } from "../model/question-data";
 import { QuestionParams } from "../model/question-params";
@@ -13,7 +12,7 @@ import { QuestionParams } from "../model/question-params";
 export class QuestionService {
   constructor(private http: HttpClient) {}
 
-  questionsResults: Question[] = [];
+  private questionsResults: Question[] = [];
 
   getQuestions(questionParams: QuestionParams): Observable<Question[]> {
     console.log(questionParams);
@@ -30,15 +29,18 @@ export class QuestionService {
       .pipe(map((data) => data.results));
   }
 
-  updateQuestions(answers: Answer[]) {
-    this.questionsResults.map((question) => {
-      //TODO:dopracovat
-      question.selectedAnswer;
-    });
+  updateQuestions(updatedQuestions: Question[]) {
+    this.questionsResults = updatedQuestions;
+    console.log(this.questionsResults);
+  }
+
+  getResults(): Question[] {
+    return this.questionsResults;
   }
 
   getScore(): number {
     let score: number = 0;
+    console.log(this.questionsResults);
     this.questionsResults.forEach((question: Question) =>
       question.selectedAnswer === question.correct_answer ? score++ : score
     );

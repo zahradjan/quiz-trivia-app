@@ -1,10 +1,10 @@
-<form [formGroup]="form">
+<ng-container [formGroup]="form">
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{ question.question }}</mat-card-title>
     </mat-card-header>
     <mat-card-actions>
-      <mat-button-toggle-group formControlName="selectedAnswer">
+      <mat-button-toggle-group [formControlName]="'selectedAnswer'">
         <mat-button-toggle
           *ngFor="let answer of question.answers! | shuffle"
           [value]="answer"
@@ -13,4 +13,4 @@
       </mat-button-toggle-group>
     </mat-card-actions>
   </mat-card>
-</form>
+</ng-container>

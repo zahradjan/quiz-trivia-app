@@ -1,12 +1,9 @@
-.score-red {
+.score-low {
   background-color: red;
-  width: max-content;
 }
-.score-yellow {
+.score-good {
   background-color: yellow;
-  width: 100%;
 }
-.score-green {
+.score-perfect {
   background-color: green;
-  width: max-content;
 }

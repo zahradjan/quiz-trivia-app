@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { map } from "rxjs";
 import { Question } from "src/app/model/question";
 import { QuestionService } from "src/app/service/question.service";
 
@@ -8,36 +9,22 @@ import { QuestionService } from "src/app/service/question.service";
   templateUrl: "./quiz-results-page.component.html",
   styleUrls: ["./quiz-results-page.component.css"],
 })
-export default class QuizResultsPageComponent {
-  //TODO: getovat ze servici
-  questions: Question[] = [
-    {
-      category: "test",
-      correct_answer: "test1",
-      difficulty: "easy",
-      incorrect_answers: ["test2", "test3"],
-      question: "Test Question?",
-      type: "",
-      selectedAnswer: "test1",
-      answers: ["test1", "test2", "test3"],
-    },
-    {
-      category: "test",
-      correct_answer: "test1",
-      difficulty: "easy",
-      incorrect_answers: ["test2", "test3"],
-      question: "Test Question?",
-      type: "",
-      selectedAnswer: "test2",
-      answers: ["test1", "test2", "test3"],
-    },
-  ];
-  score: number;
+export default class QuizResultsPageComponent implements OnInit {
+  questions: Question[] = [];
+  score: number = 0;
   constructor(
     private router: Router,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private route: ActivatedRoute
   ) {
+    this.route.data.pipe(map((data) => console.log(data))).subscribe();
+    console.log(this.questionService.getResults());
+    this.questions = this.questionService.getResults();
     this.score = this.questionService.getScore();
+    console.log(this.questions);
+  }
+  ngOnInit(): void {
+    //
   }
 
   onClick() {

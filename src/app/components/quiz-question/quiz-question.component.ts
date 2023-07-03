@@ -1,11 +1,6 @@
-import { map } from "rxjs";
-import { EventEmitter, Input, Output } from "@angular/core";
+import { EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Component } from "@angular/core";
-import {
-  FormGroup,
-  NonNullableFormBuilder,
-  Validators,
-} from "@angular/forms";
+import { FormGroup, FormGroupDirective } from "@angular/forms";
 import { Question } from "src/app/model/question";
 
 @Component({
@@ -13,7 +8,7 @@ import { Question } from "src/app/model/question";
   templateUrl: "./quiz-question.component.html",
   styleUrls: ["./quiz-question.component.css"],
 })
-export class QuizQuestionComponent {
+export class QuizQuestionComponent implements OnInit {
   @Input()
   set question(question: Question) {
     this._question = {
@@ -25,30 +20,20 @@ export class QuizQuestionComponent {
   get question() {
     return this._question;
   }
+  @Input() formGroupName!: string | number;
 
   @Output() answerSelect: EventEmitter<Question> = new EventEmitter();
 
   private _question?: any;
 
-  form: FormGroup;
-  constructor(private fb: NonNullableFormBuilder) {
-    this.form = this.createForm();
-
-    this.form
-      .get("selectedAnswer")
-      ?.valueChanges.pipe(
-        map((selectedAnswer) => {
-          if (this.form.valid) {
-            const question = { ...this.question, selectedAnswer };
-            this.answerSelect.emit(question);
-          }
-        })
-      )
-      .subscribe();
-  }
-  private createForm(): FormGroup {
-    return this.fb.group({
-      selectedAnswer: [undefined, Validators.required],
-    });
+  form: FormGroup = new FormGroup({});
+  constructor(private rootFormGroup: FormGroupDirective) {}
+  ngOnInit(): void {
+    this.form = this.rootFormGroup.control.get(
+      `${this.formGroupName}`
+    ) as FormGroup;
+    console.log(
+      this.rootFormGroup.control.get(`${this.formGroupName}`) as FormGroup
+    );
   }
 }
