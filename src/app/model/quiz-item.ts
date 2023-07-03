@@ -1,4 +1,4 @@
-export interface Question {
+export interface QuizItem {
   category: string;
   type: string;
   difficulty: string;

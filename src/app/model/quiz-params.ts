@@ -1,4 +1,4 @@
-export interface QuestionParams {
+export interface QuizParams {
   categoryId: number;
   difficulty: string;
 }

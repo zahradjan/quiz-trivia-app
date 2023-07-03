@@ -1,33 +1,25 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { map } from "rxjs";
-import { Question } from "src/app/model/question";
-import { QuestionService } from "src/app/service/question.service";
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { QuizItem } from "src/app/model/quiz-item";
+import { QuizItemService } from "src/app/service/quiz-item.service";
 
 @Component({
   selector: "app-quiz-results-page",
   templateUrl: "./quiz-results-page.component.html",
   styleUrls: ["./quiz-results-page.component.css"],
 })
-export default class QuizResultsPageComponent implements OnInit {
-  questions: Question[] = [];
+export default class QuizResultsPageComponent {
+  quizItems: QuizItem[] = [];
   score: number = 0;
   constructor(
     private router: Router,
-    private questionService: QuestionService,
-    private route: ActivatedRoute
+    private quizItemService: QuizItemService
   ) {
-    this.route.data.pipe(map((data) => console.log(data))).subscribe();
-    console.log(this.questionService.getResults());
-    this.questions = this.questionService.getResults();
-    this.score = this.questionService.getScore();
-    console.log(this.questions);
-  }
-  ngOnInit(): void {
-    //
+    this.quizItems = this.quizItemService.getAnsweredQuizItems();
+    this.score = this.quizItemService.getScore();
   }
 
-  onClick() {
+  onClick(): void {
     this.router.navigate([""]);
   }
 }

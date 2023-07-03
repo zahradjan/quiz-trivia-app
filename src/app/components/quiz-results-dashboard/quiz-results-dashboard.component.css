@@ -1,0 +1,15 @@
+.answer-correct {
+  background-color: green;
+}
+.answer-incorrect {
+  background-color: red;
+}
+button:disabled,
+button[disabled] {
+  color: black;
+  opacity: 1;
+}
+#answerButton {
+  color: black;
+  opacity: 1;
+}

@@ -1,6 +1,8 @@
-.answer-correct {
-  background-color: green;
+.banner-group {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
-.answer-incorrect {
-  background-color: red;
+h1 {
+  text-align: center;
 }

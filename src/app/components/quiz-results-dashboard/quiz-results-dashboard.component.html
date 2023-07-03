@@ -1,0 +1,26 @@
+<ng-container *ngFor="let quizItem of quizItems; let i = index">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title
+        [innerHTML]="quizItem.question | markdownToHtml"
+      ></mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+      <mat-button-toggle-group>
+        <mat-button-toggle
+          *ngFor="let answer of quizItem.answers!"
+          id="answerButton"
+          [disabled]="true"
+          [ngClass]="{
+            'answer-correct': answer === quizItem.correct_answer,
+            'answer-incorrect':
+              answer === quizItem.selectedAnswer &&
+              quizItem.selectedAnswer !== quizItem.correct_answer
+          }"
+        >
+          {{ answer }}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>

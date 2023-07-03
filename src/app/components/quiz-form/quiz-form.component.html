@@ -1,14 +1,16 @@
-<form [formGroup]="form" (ngSubmit)="submitAnswers()">
-  <ng-container *ngIf="questions" formArrayName="answers">
-    <ng-container *ngFor="let question of questions; let i = index">
+<form [formGroup]="form" (ngSubmit)="submitQuizItems()">
+  <ng-container formArrayName="quizItems">
+    <ng-container *ngFor="let quizItem of quizItems; let i = index">
       <mat-card [formGroupName]="i">
         <mat-card-header>
-          <mat-card-title>{{ question.question }}</mat-card-title>
+          <mat-card-title [innerHTML]="quizItem.question | markdownToHtml">
+          </mat-card-title>
         </mat-card-header>
         <mat-card-actions>
           <mat-button-toggle-group [formControlName]="'selectedAnswer'">
             <mat-button-toggle
-              *ngFor="let answer of question.answers! | shuffle"
+              *ngFor="let answer of quizItem.answers! | shuffle"
+              id="answerButton"
               [value]="answer"
               >{{ answer }}</mat-button-toggle
             >
@@ -17,7 +19,9 @@
       </mat-card>
     </ng-container>
     <ng-container *ngIf="form.valid">
-      <button type="submit" mat-raised-button>submit</button>
+      <button type="submit" mat-raised-button id="submitBtn">
+        Submit
+      </button>
     </ng-container>
   </ng-container>
 </form>

@@ -1,4 +1,3 @@
-import { map } from "rxjs";
 import {
   Component,
   EventEmitter,
@@ -12,7 +11,7 @@ import {
   NonNullableFormBuilder,
   Validators,
 } from "@angular/forms";
-import { Question } from "src/app/model/question";
+import { QuizItem } from "src/app/model/quiz-item";
 
 @Component({
   selector: "app-quiz-form",
@@ -20,57 +19,32 @@ import { Question } from "src/app/model/question";
   styleUrls: ["./quiz-form.component.css"],
 })
 export class QuizFormComponent implements OnInit {
-  // @Input()
-  // questions: Question[] | undefined;
   @Input()
-  set questions(questions: Question[] | undefined) {
-    if (questions) {
-      this._questions = questions.map((question) => {
-        return {
-          ...question,
-          answers: [
-            question.correct_answer,
-            ...question.incorrect_answers,
-          ],
-        };
-      });
-    }
-  }
+  quizItems: QuizItem[] = [];
 
-  get questions(): Question[] | undefined {
-    return this._questions;
-  }
-  @Output() submit: EventEmitter<{ answers: Question[] }> =
-    new EventEmitter<{ answers: Question[] }>();
+  @Output() submit: EventEmitter<QuizItem[]> = new EventEmitter<
+    QuizItem[]
+  >();
 
   form: FormGroup;
-  private _questions?: Question[];
   constructor(private fb: NonNullableFormBuilder) {
-    this.form = this.createForm();
-
-    this.form?.valueChanges
-      .pipe(
-        map((value) => {
-          console.log(value);
-        })
-      )
-      .subscribe();
+    this.form = this.createQuizItemsForm();
   }
   ngOnInit(): void {
-    const questionResults = this.form.get("answers") as FormArray;
+    const quizItems: FormArray = <FormArray>this.form.get("quizItems");
 
-    this.questions?.forEach((question, index) => {
-      questionResults.push(this.createAnswerForm());
-      questionResults.at(index).patchValue(question);
+    this.quizItems.forEach((quizItem: QuizItem, index: number) => {
+      quizItems.push(this.createQuizItemForm());
+      quizItems.at(index).patchValue(quizItem);
     });
   }
-  private createForm(): FormGroup {
+  private createQuizItemsForm(): FormGroup {
     return this.fb.group({
-      answers: this.fb.array([]),
+      quizItems: this.fb.array([]),
     });
   }
 
-  private createAnswerForm(): FormGroup {
+  private createQuizItemForm(): FormGroup {
     return this.fb.group({
       category: [undefined],
       type: [undefined],
@@ -83,8 +57,8 @@ export class QuizFormComponent implements OnInit {
     });
   }
 
-  submitAnswers(): void {
-    console.log(this.form.value);
-    this.submit.emit(this.form.value);
+  submitQuizItems(): void {
+    const { quizItems } = this.form.value;
+    this.submit.emit(quizItems);
   }
 }

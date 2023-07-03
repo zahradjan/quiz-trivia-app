@@ -1,23 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import QuizResultsPageComponent from "./quiz-results-page.component";
 
-import { QuizResultsPageComponent } from './quiz-results-page.component';
-
-describe('QuizResultsPageComponent', () => {
+describe("QuizResultsPageComponent", () => {
   let component: QuizResultsPageComponent;
   let fixture: ComponentFixture<QuizResultsPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ QuizResultsPageComponent ]
-    })
-    .compileComponents();
+      declarations: [QuizResultsPageComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(QuizResultsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

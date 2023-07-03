@@ -1,7 +1,11 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { FormGroup, NonNullableFormBuilder } from "@angular/forms";
+import {
+  FormGroup,
+  NonNullableFormBuilder,
+  Validators,
+} from "@angular/forms";
 import { Category } from "src/app/model/category";
-import { QuestionParams } from "src/app/model/question-params";
+import { QuizParams } from "src/app/model/quiz-params";
 
 @Component({
   selector: "app-quiz-select-form",
@@ -11,10 +15,11 @@ import { QuestionParams } from "src/app/model/question-params";
 export class QuizSelectFormComponent {
   @Input()
   categories: Category[] = [];
+  @Input()
+  difficulties: string[] = [];
 
-  @Output() create: EventEmitter<QuestionParams> =
-    new EventEmitter<QuestionParams>();
-  difficulties: string[] = ["Easy", "Medium", "Hard"];
+  @Output() create: EventEmitter<QuizParams> =
+    new EventEmitter<QuizParams>();
 
   form: FormGroup;
   constructor(private fb: NonNullableFormBuilder) {
@@ -22,14 +27,13 @@ export class QuizSelectFormComponent {
   }
 
   submit(): void {
-    console.log(this.form.value);
     this.create.emit(this.form.value);
   }
 
   private createForm(): FormGroup {
     return this.fb.group({
-      categoryId: [undefined],
-      difficulty: [undefined],
+      categoryId: [undefined, Validators.required],
+      difficulty: [undefined, Validators.required],
     });
   }
 }

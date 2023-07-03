@@ -1,11 +1,12 @@
 <h1>Quiz Maker</h1>
 <app-quiz-select-form
   [categories]="(categories$ | async)!"
+  [difficulties]="(difficulties$ | async)!"
   (create)="onCreate($event)"
 ></app-quiz-select-form>
-<ng-container *ngIf="questions$ | async as questions">
+<ng-container *ngIf="quizItems$ | async as quizItems">
   <app-quiz-form
-    [questions]="questions"
+    [quizItems]="quizItems"
     (submit)="onAnswersSubmit($event)"
   ></app-quiz-form>
 </ng-container>
