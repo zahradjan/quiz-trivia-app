@@ -1,3 +1,7 @@
 form {
   text-align: center;
 }
+
+#submitBtn {
+  width: 100%;
+}

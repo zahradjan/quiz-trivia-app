@@ -1,0 +1,10 @@
+.score-low {
+  background-color: red;
+  width: 100%;
+}
+.score-good {
+  background-color: yellow;
+}
+.score-perfect {
+  background-color: green;
+}

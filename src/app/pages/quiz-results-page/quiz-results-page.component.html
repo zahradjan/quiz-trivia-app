@@ -1,0 +1,12 @@
+<h1>RESULTS</h1>
+<ng-container *ngIf="quizItems">
+  <app-quiz-results-dashboard
+    [quizItems]="quizItems"
+  ></app-quiz-results-dashboard>
+  <div class="banner-group">
+    <app-quiz-score-banner [score]="score"></app-quiz-score-banner>
+    <button mat-raised-button (click)="onClick()">
+      Create a new quiz
+    </button>
+  </div>
+</ng-container>
