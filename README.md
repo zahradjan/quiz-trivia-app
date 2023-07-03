@@ -6,7 +6,7 @@
 This project is part of Angular Certification Intermediate practical exam. Its a quiz maker that generates 5 questions based on categories and difficulties. After selecting or answers you can submit them and quiz result page will appear with right answers highlighted in green and wrong answers in red. Your score will appear at the bottom of quiz result
 
 <p align="center">
-<img height="300px" src="assets/quiz-trivia-selected.png"></>
+<img height="300px" src="assets/quiz-trivia-selected.PNG"></>
 <img height="300px" src="assets/quiz-trivia-results.PNG"></>
 </p>
 
