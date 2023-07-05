@@ -1,9 +1,7 @@
 <ng-container *ngFor="let quizItem of quizItems; let i = index">
   <mat-card>
     <mat-card-header>
-      <mat-card-title
-        [innerHTML]="quizItem.question | markdownToHtml"
-      ></mat-card-title>
+      <mat-card-title [innerHTML]="quizItem.question"></mat-card-title>
     </mat-card-header>
     <mat-card-actions>
       <mat-button-toggle-group>
@@ -13,12 +11,10 @@
           [disabled]="true"
           [ngClass]="{
             'answer-correct': answer === quizItem.correct_answer,
-            'answer-incorrect':
-              answer === quizItem.selectedAnswer &&
-              quizItem.selectedAnswer !== quizItem.correct_answer
+            'answer-incorrect': answer === quizItem.selectedAnswer && quizItem.selectedAnswer !== quizItem.correct_answer
           }"
         >
-          {{ answer }}
+          <span [innerHTML]="answer"> </span>
         </mat-button-toggle>
       </mat-button-toggle-group>
     </mat-card-actions>
