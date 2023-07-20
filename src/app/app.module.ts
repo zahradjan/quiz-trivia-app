@@ -18,7 +18,6 @@ import QuizPageComponent from "./pages/quiz-page/quiz-page.component";
 import QuizResultsPageComponent from "./pages/quiz-results-page/quiz-results-page.component";
 import { QuizScoreBannerComponent } from "./components/quiz-score-banner/quiz-score-banner.component";
 import { QuizResultsDashboardComponent } from "./components/quiz-results-dashboard/quiz-results-dashboard.component";
-import { MarkdownToHtmlPipe } from "./pipes/markdown-to-html.pipe";
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import { MarkdownToHtmlPipe } from "./pipes/markdown-to-html.pipe";
     QuizResultsPageComponent,
     QuizScoreBannerComponent,
     QuizResultsDashboardComponent,
-    MarkdownToHtmlPipe,
   ],
   imports: [
     BrowserModule,
