@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
   name: "shuffle",
+  standalone: true,
 })
 export class ShufflePipe implements PipeTransform {
   transform(array: string[]): string[] {

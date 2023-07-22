@@ -1,7 +1,23 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { provideRouter } from "@angular/router";
+import { AppComponent } from "./app/app.component";
+import { bootstrapApplication } from "@angular/platform-browser";
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from "@angular/common/http";
+import { importProvidersFrom } from "@angular/core";
+import { appRoutes } from "./app/app.routes";
 
-import { AppModule } from './app/app.module';
+export const providers = [
+  provideRouter(appRoutes),
+  provideHttpClient(withInterceptorsFromDi()),
+  importProvidersFrom(BrowserAnimationsModule),
+];
 
-
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers,
+}).catch((err) => {
+  // eslint-disable-next-line no-console
+  console.error(err);
+});

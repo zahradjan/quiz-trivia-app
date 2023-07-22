@@ -8,10 +8,15 @@ import { QuizParams } from "src/app/model/quiz-params";
 import { Router } from "@angular/router";
 import { EMPTY } from "rxjs";
 import { DifficultyService } from "src/app/service/difficulty.service";
+import { QuizSelectFormComponent } from "src/app/components/quiz-select-form/quiz-select-form.component";
+import { QuizFormComponent } from "src/app/components/quiz-form/quiz-form.component";
+import { CommonModule } from "@angular/common";
 @Component({
   selector: "app-quiz-page",
   templateUrl: "./quiz-page.component.html",
   styleUrls: ["./quiz-page.component.css"],
+  standalone: true,
+  imports: [CommonModule, QuizSelectFormComponent, QuizFormComponent],
 })
 export default class QuizPageComponent {
   categories$: Observable<Category[] | undefined>;
