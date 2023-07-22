@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common";
 import {
   Component,
   EventEmitter,
@@ -9,14 +10,28 @@ import {
   FormArray,
   FormGroup,
   NonNullableFormBuilder,
+  ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import { MatCardModule } from "@angular/material/card";
 import { QuizItem } from "src/app/model/quiz-item";
+import { ShufflePipe } from "src/app/pipes/shuffle.pipe";
 
 @Component({
   selector: "app-quiz-form",
   templateUrl: "./quiz-form.component.html",
   styleUrls: ["./quiz-form.component.css"],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    ShufflePipe,
+  ],
 })
 export class QuizFormComponent implements OnInit {
   @Input()
